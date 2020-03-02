@@ -349,7 +349,7 @@ int sys_mkdir(void) {
     return 0;
 }
 
-int sys_mkdir(void) {
+int sys_rmdir(void) {
     struct inode *ip, *dp;
     struct dirent de;
     char name[DIRSIZ], *path;
