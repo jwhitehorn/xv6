@@ -1,7 +1,5 @@
-#include "kern/types.h"
-#include "kern/stat.h"
+#include "kern/public.h"
 #include "user.h"
-#include "kern/param.h"
 
 // Memory allocator by Kernighan and Ritchie,
 // The C programming Language, 2nd ed.  Section 8.7.

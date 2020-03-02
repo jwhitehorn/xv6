@@ -1,6 +1,4 @@
-#include "kern/types.h"
-#include "kern/stat.h"
-#include "kern/fcntl.h"
+#include "kern/public.h"
 #include "user.h"
 #include "kern/x86.h"
 

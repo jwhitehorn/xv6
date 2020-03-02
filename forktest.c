@@ -1,8 +1,7 @@
 // Test that fork fails gracefully.
 // Tiny executable so that the limit can be filling the proc table.
 
-#include "kern/types.h"
-#include "kern/stat.h"
+#include "kern/public.h"
 #include "user.h"
 
 #define N  1000

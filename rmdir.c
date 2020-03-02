@@ -1,5 +1,4 @@
-#include "kern/types.h"
-#include "kern/stat.h"
+#include "kern/public.h"
 #include "user.h"
 
 int main(int argc, char *argv[]) {

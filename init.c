@@ -1,9 +1,7 @@
 // init: The initial user-level program
 
-#include "kern/types.h"
-#include "kern/stat.h"
+#include "kern/public.h"
 #include "user.h"
-#include "kern/fcntl.h"
 
 char *argv[] = { "sh", 0 };
 

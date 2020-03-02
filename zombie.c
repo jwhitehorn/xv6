@@ -1,8 +1,7 @@
 // Create a zombie process that
 // must be reparented at exit.
 
-#include "kern/types.h"
-#include "kern/stat.h"
+#include "kern/public.h"
 #include "user.h"
 
 int
