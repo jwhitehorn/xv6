@@ -4,6 +4,6 @@ RUN apt-get update
 RUN apt-get -y install build-essential qemu qemu-kvm
 
 RUN mkdir /src
-WORKDIR /src
+WORKDIR /src/
 
-CMD QEMUEXTRA=-nographic make qemu
+CMD cd ./kern/ && make kernel && cd ../ && QEMUEXTRA=-nographic make qemu

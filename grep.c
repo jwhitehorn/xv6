@@ -1,7 +1,7 @@
 // Simple grep.  Only supports ^ . * $ operators.
 
-#include "types.h"
-#include "stat.h"
+#include "kern/types.h"
+#include "kern/stat.h"
 #include "user.h"
 
 char buf[1024];
@@ -104,4 +104,3 @@ int matchstar(int c, char *re, char *text)
   }while(*text!='\0' && (*text++==c || c=='.'));
   return 0;
 }
-

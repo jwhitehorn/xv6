@@ -1,5 +1,5 @@
-#include "types.h"
-#include "stat.h"
+#include "kern/types.h"
+#include "kern/stat.h"
 #include "user.h"
 
 int
