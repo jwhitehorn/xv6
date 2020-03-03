@@ -107,7 +107,8 @@ mkfs: mkfs.c
 fs.img: mkfs README.md
 	cd ./build/bin && ../../mkfs ../../fs.img *
 
-
+clean:
+	rm *.o *.d *.img mkfs bootblock *.asm
 
 
 # try to generate a unique GDB port
