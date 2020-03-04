@@ -1,5 +1,5 @@
 #include "kern/public.h"
-#include "user.h"
+#include <string.h>
 
 static void
 putc(int fd, char c)

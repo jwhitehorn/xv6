@@ -1,7 +1,7 @@
 // Simple grep.  Only supports ^ . * $ operators.
 
 #include "kern/public.h"
-#include "user.h"
+#include <string.h>
 
 char buf[1024];
 int match(char*, char*);

@@ -1,6 +1,6 @@
 // Shell.
 #include "kern/public.h"
-#include "user.h"
+#include <string.h>
 
 // Parsed command representation
 #define EXEC  1

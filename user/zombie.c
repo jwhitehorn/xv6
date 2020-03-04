@@ -2,7 +2,7 @@
 // must be reparented at exit.
 
 #include "kern/public.h"
-#include "user.h"
+#include <string.h>
 
 int
 main(void)

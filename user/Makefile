@@ -7,7 +7,7 @@
 
 CC = $(TOOLPREFIX)gcc
 LD = $(TOOLPREFIX)ld
-CFLAGS = -I../ -Wno-incompatible-library-redeclaration -Wno-builtin-declaration-mismatch -c
+CFLAGS = -I../ -I./ -Wno-incompatible-library-redeclaration -Wno-builtin-declaration-mismatch -c
 CFLAGS += -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer
 CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
 BINPATH = ../build/bin/
@@ -21,9 +21,16 @@ ifneq ($(shell $(CC) -dumpspecs 2>/dev/null | grep -e '[^f]nopie'),)
 CFLAGS += -fno-pie -nopie
 endif
 
+SUBTOOLS := $(wildcard */.)
+
 -include $(BINPATH)*.d
 
-userland: cat echo grep init kill ln ls mkdir ps rm rmdir sh wc zombie
+FORCE:
+
+$(SUBTOOLS): FORCE
+	$(MAKE) -C $@
+
+userland: cat echo grep init kill ln ls mkdir ps rm rmdir sh wc zombie $(SUBTOOLS)
 	rm $(BINPATH)*.d
 	rm $(BINPATH)*.o
 
