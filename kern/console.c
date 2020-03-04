@@ -14,6 +14,7 @@
 #include "mmu.h"
 #include "proc.h"
 #include "x86.h"
+#include "acpi.h"
 
 static void consputc(int);
 
@@ -119,6 +120,8 @@ panic(char *s)
   for(i=0; i<10; i++)
     cprintf(" %p", pcs[i]);
   panicked = 1; // freeze other CPU
+
+  acpi_halt();
   for(;;)
     ;
 }
@@ -296,4 +299,3 @@ consoleinit(void)
 
   ioapicenable(IRQ_KBD, 0);
 }
-
