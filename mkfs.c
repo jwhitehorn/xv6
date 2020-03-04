@@ -127,6 +127,24 @@ main(int argc, char *argv[])
   strcpy(de.name, "..");
   iappend(rootino, &de, sizeof(de));
 
+
+  uint binino = ialloc(T_DIR);
+
+  bzero(&de, sizeof(de));
+  de.inum = xshort(binino);
+  strcpy(de.name, "bin");
+  iappend(rootino, &de, sizeof(de));
+
+  bzero(&de, sizeof(de));
+  de.inum = xshort(binino);
+  strcpy(de.name, ".");
+  iappend(binino, &de, sizeof(de));
+
+  bzero(&de, sizeof(de));
+  de.inum = xshort(rootino);
+  strcpy(de.name, "..");
+  iappend(binino, &de, sizeof(de));
+
   for(i = 2; i < argc; i++){
     assert(index(argv[i], '/') == 0);
 
@@ -135,25 +153,30 @@ main(int argc, char *argv[])
       exit(1);
     }
 
-    // Skip leading _ in name when writing to file system.
-    // The binaries are named _rm, _cat, etc. to keep the
-    // build operating system from trying to execute them
-    // in place of system binaries like rm and cat.
-    if(argv[i][0] == '_')
-      ++argv[i];
+    uint path = binino;
+
+    if(strcmp(argv[i], "init") == 0)
+      path = rootino;
 
     inum = ialloc(T_FILE);
 
     bzero(&de, sizeof(de));
     de.inum = xshort(inum);
     strncpy(de.name, argv[i], DIRSIZ);
-    iappend(rootino, &de, sizeof(de));
+    iappend(path, &de, sizeof(de));
 
     while((cc = read(fd, buf, sizeof(buf))) > 0)
       iappend(inum, buf, cc);
 
     close(fd);
   }
+
+  // fix size of bin inode dir
+  rinode(binino, &din);
+  off = xint(din.size);
+  off = ((off/BSIZE) + 1) * BSIZE;
+  din.size = xint(off);
+  winode(binino, &din);
 
   // fix size of root inode dir
   rinode(rootino, &din);
