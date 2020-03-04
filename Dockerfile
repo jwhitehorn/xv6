@@ -6,5 +6,6 @@ RUN apt-get -y install gcc-multilib
 
 RUN mkdir /src
 WORKDIR /src/
+COPY . .
 
 CMD ./build.sh && QEMUEXTRA=-nographic make qemu
