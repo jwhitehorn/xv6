@@ -1,5 +1,4 @@
 // Shell.
-
 #include "kern/public.h"
 #include "user.h"
 
@@ -75,6 +74,11 @@ runcmd(struct cmd *cmd)
     if(ecmd->argv[0] == 0)
       exit();
     exec(ecmd->argv[0], ecmd->argv);
+
+    char buf[256];
+    strcpy(buf, "/bin/");
+    strcat_s(buf, ecmd->argv[0], 256);
+    exec(buf, ecmd->argv);
     printf(2, "exec %s failed\n", ecmd->argv[0]);
     break;
 
