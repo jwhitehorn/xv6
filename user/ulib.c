@@ -13,6 +13,10 @@ strcpy(char *s, const char *t)
   return os;
 }
 
+char* strlcpy(char *dst, const char *src, int size) {
+    return strcpy(dst, src); //TODO: actually implement
+}
+
 char* strcat_s(char *dest, char *right, int max_len) {
     int writing = -1;
     for(int i = 0; i !=max_len; i++){

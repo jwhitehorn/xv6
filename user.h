@@ -1,6 +1,7 @@
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);
+char* strlcpy(char *dst, const char *src, int size);
 char* strcat_s(char *dest, char *right, int max_len);
 void *memmove(void*, const void*, int);
 char* strchr(const char*, char c);
