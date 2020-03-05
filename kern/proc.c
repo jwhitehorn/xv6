@@ -329,7 +329,7 @@ wait(void)
 void
 scheduler(void)
 {
-  struct proc *p;
+  struct proc *p = 0;
   struct cpu *c = mycpu();
   c->proc = 0;
 
@@ -337,11 +337,17 @@ scheduler(void)
     // Enable interrupts on this processor.
     sti();
 
+    if (p == &ptable.proc[NPROC]){
+      //credit to @swetland for this trick: https://github.com/swetland/xv6/commit/1c0d873592bb6d44ab2d9e8042fdd4feabbc5e47
+      halt();
+    }
+
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
+
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
