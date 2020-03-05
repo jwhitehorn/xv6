@@ -28,7 +28,7 @@ SUBTOOLS := $(wildcard */.)
 FORCE:
 
 $(SUBTOOLS): FORCE
-	$(MAKE) -C $@
+	#$(MAKE) -C $@
 
 userland: cat echo grep init kill ln ls mkdir ps rm rmdir sh wc zombie $(SUBTOOLS)
 	rm $(BINPATH)*.d
